@@ -1,0 +1,46 @@
+{
+    "sourceFile": "Shell_Tools/online_remote_shell/Data.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1697378207248,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1697378247528,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,5 +4,5 @@\n     def pwd_cd(self):\r\n         return {\"win\":\"cd\",\"linux\":\"pwd\"}[self.OS_TYPE]\r\n \r\n \r\n-logout=0x10003\n\\ No newline at end of file\n+LOG_OUT=0x10003\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1697378724810,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,9 @@\n+class Data:\r\n+    def __init__(self,OS_TYPE) -> None:\r\n+        self.OS_TYPE=OS_TYPE\r\n+    def pwd_cd(self):\r\n+        return {\"win\":\"cd\",\"linux\":\"pwd\"}[self.OS_TYPE]\r\n+\r\n+\r\n+LOG_OUT=0x10003\r\n+HELP=0x20001\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1697378823390,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,13 +5,6 @@\n         return {\"win\":\"cd\",\"linux\":\"pwd\"}[self.OS_TYPE]\r\n \r\n \r\n LOG_OUT=0x10003\r\n-HELP=0x20001\n-class Data:\r\n-    def __init__(self,OS_TYPE) -> None:\r\n-        self.OS_TYPE=OS_TYPE\r\n-    def pwd_cd(self):\r\n-        return {\"win\":\"cd\",\"linux\":\"pwd\"}[self.OS_TYPE]\r\n-\r\n-\r\n-LOG_OUT=0x10003\n\\ No newline at end of file\n+HELP=0x20001\r\n+NOT_HELP=0x20002\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1697380004953,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,18 @@\n         self.OS_TYPE=OS_TYPE\r\n     def pwd_cd(self):\r\n         return {\"win\":\"cd\",\"linux\":\"pwd\"}[self.OS_TYPE]\r\n \r\n+Host=\"127.0.0.1\"\r\n+# Host=\"56s815617a.goho.co\"\r\n+PORT = 12522\r\n+EOF = '0x00'\r\n \r\n+sever_key=\"0x26916166291\"#双方程序需要\r\n+cilent_key=\"0x3637126198\"\r\n+\r\n+Sever_Message_start=\"0x217732080\"\r\n+Sever_Message_end=\"0x0q89888079\"\r\n+Sever_Message_confirm=\"0x327092\"\r\n LOG_OUT=0x10003\r\n HELP=0x20001\r\n NOT_HELP=0x20002\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1697416631598,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n Host=\"127.0.0.1\"\r\n # Host=\"56s815617a.goho.co\"\r\n PORT = 12522\r\n EOF = '0x00'\r\n+QIAN_MING_IMAGE=\"E:\\pycharm\\MyTools\\Image_Tools\\签名.png\"\r\n \r\n sever_key=\"0x26916166291\"#双方程序需要\r\n cilent_key=\"0x3637126198\"\r\n \r\n"
+                },
+                {
+                    "date": 1697417251506,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,6 +16,8 @@\n Sever_Message_start=\"0x217732080\"\r\n Sever_Message_end=\"0x0q89888079\"\r\n Sever_Message_confirm=\"0x327092\"\r\n LOG_OUT=0x10003\r\n+SUCESS=0x10200\r\n+NOT_FOUND=0x10404\r\n\\ No newline at end of file\n HELP=0x20001\r\n-NOT_HELP=0x20002\n+NOT_HELP=0x20002\r\n"
+                },
+                {
+                    "date": 1697437510404,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,12 @@\n \r\n Sever_Message_start=\"0x217732080\"\r\n Sever_Message_end=\"0x0q89888079\"\r\n Sever_Message_confirm=\"0x327092\"\r\n-LOG_OUT=0x10003\r\n-SUCESS=0x10200\r\n-NOT_FOUND=0x10404\r\n+\r\n+LOG_OUT=\"0x10003\"\r\n\\ No newline at end of file\n+SUCESS=\"0x10200\"\r\n+NOT_FOUND=\"0x10404\"\r\n+NETWORK_ERROR=\"0x10400\"\r\n HELP=0x20001\r\n-NOT_HELP=0x20002\n+NOT_HELP=0x20002\r\n+\r\n"
+                }
+            ],
+            "date": 1697378207248,
+            "name": "Commit-0",
+            "content": "class Data:\r\n    def __init__(self,OS_TYPE) -> None:\r\n        self.OS_TYPE=OS_TYPE\r\n    def pwd_cd(self):\r\n        return {\"win\":\"cd\",\"linux\":\"pwd\"}[self.OS_TYPE]\r\n\r\n\r\nlogout=0x10003"
+        }
+    ]
+}

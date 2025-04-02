@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./Shell_Tools/online_remote_shell"
+    ]
+}

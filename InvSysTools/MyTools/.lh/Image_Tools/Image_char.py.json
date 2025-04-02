@@ -1,0 +1,22 @@
+{
+    "sourceFile": "Image_Tools/Image_char.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1697416593275,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1697416639634,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n     gray = 0.2126 * r + 0.7152 * g + 0.0722 * b\r\n     bili = 256 / len(txt)\r\n     index = int(gray / bili)\r\n     return txt[index]\r\n-def get_txt_image(photo=):\r\n+def get_txt_image(photo):\r\n     image = Image.open(photo)  # 导入一张图片\r\n     width = 107\r\n     height = 38\r\n     image = image.resize((width, height), Image.NEAREST)\r\n"
+                }
+            ],
+            "date": 1697416593275,
+            "name": "Commit-0",
+            "content": "# author:高金磊\r\n# datetime:2022/8/1 14:48\r\n\r\nfrom PIL import Image\r\ndef _getchar(r, g, b):\r\n    #####彩图\r\n    # txt = list(\"$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\\\"^`'.\")\r\n    ####黑白图\r\n    txt = list(\"* \")\r\n    gray = 0.2126 * r + 0.7152 * g + 0.0722 * b\r\n    bili = 256 / len(txt)\r\n    index = int(gray / bili)\r\n    return txt[index]\r\ndef get_txt_image(photo=):\r\n    image = Image.open(photo)  # 导入一张图片\r\n    width = 107\r\n    height = 38\r\n    image = image.resize((width, height), Image.NEAREST)\r\n    txt = \"\"\r\n    for y in range(height):\r\n        for x in range(width):\r\n            pix = image.getpixel((x, y))\r\n            txt += _getchar(r=pix[0],g=pix[1],b=pix[2])\r\n        txt += \"\\n\"\r\n    return txt\r\n# print(get_txt_image())"
+        }
+    ]
+}

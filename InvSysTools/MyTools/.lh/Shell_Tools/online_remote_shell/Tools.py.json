@@ -1,0 +1,86 @@
+{
+    "sourceFile": "Shell_Tools/online_remote_shell/Tools.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 17,
+            "patches": [
+                {
+                    "date": 1697416837319,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1697417354624,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \r\n-from Shell_Tools.online_remote_shell import Result\r\n+from Shell_Tools.online_remote_shell.Result import Result\r\n \r\n \r\n def next_Cpu(command,funs):\r\n     if len(funs)==0:\r\n"
+                },
+                {
+                    "date": 1697442439423,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,6 +5,6 @@\n def next_Cpu(command,funs):\r\n     if len(funs)==0:\r\n         return Result.getResult(processor=\"next_cpu\")\r\n     else:\r\n-        funs.pop(0)\r\n-        return funs[0](command,funs)\n\\ No newline at end of file\n+        \r\n+        return funs.pop(0)(command,funs)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1697443418046,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,6 +5,6 @@\n def next_Cpu(command,funs):\r\n     if len(funs)==0:\r\n         return Result.getResult(processor=\"next_cpu\")\r\n     else:\r\n-        \r\n-        return funs.pop(0)(command,funs)\n\\ No newline at end of file\n+        fun=funs.pop(0)\r\n+        return fun(command,funs)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1697443890539,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n \r\n from Shell_Tools.online_remote_shell.Result import Result\r\n \r\n-\r\n+def Aop\r\n def next_Cpu(command,funs):\r\n     if len(funs)==0:\r\n         return Result.getResult(processor=\"next_cpu\")\r\n     else:\r\n"
+                },
+                {
+                    "date": 1697443911429,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n \r\n from Shell_Tools.online_remote_shell.Result import Result\r\n \r\n-def Aop\r\n+def Aop_preprocessing()\r\n def next_Cpu(command,funs):\r\n     if len(funs)==0:\r\n         return Result.getResult(processor=\"next_cpu\")\r\n     else:\r\n"
+                },
+                {
+                    "date": 1697443954653,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,11 @@\n \r\n from Shell_Tools.online_remote_shell.Result import Result\r\n \r\n-def Aop_preprocessing()\r\n+def Aop_preprocessing():\r\n+    pass\r\n def next_Cpu(command,funs):\r\n+    Aop_preprocessing()\r\n     if len(funs)==0:\r\n         return Result.getResult(processor=\"next_cpu\")\r\n     else:\r\n         fun=funs.pop(0)\r\n"
+                },
+                {
+                    "date": 1697444260468,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,21 @@\n \r\n from Shell_Tools.online_remote_shell.Result import Result\r\n+from myPrint import *\r\n+def aop_preprocessing(command,fun):\r\n+    f\r\n+    myPrint_Hint(\"指令：{command},下一个处理器：{fun.}\")\r\n \r\n-def Aop_preprocessing():\r\n+def aop_postprocessing(res:Result):\r\n     pass\r\n def next_Cpu(command,funs):\r\n-    Aop_preprocessing()\r\n\\ No newline at end of file\n+    \r\n     if len(funs)==0:\r\n-        return Result.getResult(processor=\"next_cpu\")\r\n+        res=Result.getResult(processor=\"next_cpu\")\r\n+        aop_postprocessing(res)\r\n+        return res\r\n     else:\r\n         fun=funs.pop(0)\r\n-        return fun(command,funs)\n+        aop_preprocessing(command,fun)\r\n+        res= fun(command,funs)\r\n+        aop_postprocessing(res)\r\n+        return res\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1697444289372,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n from Shell_Tools.online_remote_shell.Result import Result\r\n from myPrint import *\r\n def aop_preprocessing(command,fun):\r\n     f\r\n-    myPrint_Hint(\"指令：{command},下一个处理器：{fun.}\")\r\n+    myPrint_Hint(\"指令：{command},下一个处理器：{funs[0].__name__}\")\r\n \r\n def aop_postprocessing(res:Result):\r\n     pass\r\n def next_Cpu(command,funs):\r\n"
+                },
+                {
+                    "date": 1697444338721,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,12 @@\n \r\n from Shell_Tools.online_remote_shell.Result import Result\r\n from myPrint import *\r\n def aop_preprocessing(command,fun):\r\n-    f\r\n-    myPrint_Hint(\"指令：{command},下一个处理器：{funs[0].__name__}\")\r\n+    myPrint_Hint(\"指令：{command},下一个处理器：{fun.__name__}\")\r\n \r\n def aop_postprocessing(res:Result):\r\n-    pass\r\n+    myPrint_Success(res)\r\n def next_Cpu(command,funs):\r\n     \r\n     if len(funs)==0:\r\n         res=Result.getResult(processor=\"next_cpu\")\r\n"
+                },
+                {
+                    "date": 1697444466351,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n \r\n from Shell_Tools.online_remote_shell.Result import Result\r\n from myPrint import *\r\n def aop_preprocessing(command,fun):\r\n-    myPrint_Hint(\"指令：{command},下一个处理器：{fun.__name__}\")\r\n+    myPrint_Hint(f\"指令：{command},下一个处理器：{fun.__name__}\")\r\n \r\n def aop_postprocessing(res:Result):\r\n     myPrint_Success(res)\r\n def next_Cpu(command,funs):\r\n"
+                },
+                {
+                    "date": 1697444628918,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,15 @@\n from myPrint import *\r\n def aop_preprocessing(command,fun):\r\n     myPrint_Hint(f\"指令：{command},下一个处理器：{fun.__name__}\")\r\n \r\n+cache=None\r\n def aop_postprocessing(res:Result):\r\n-    myPrint_Success(res)\r\n+    if cache==res:\r\n+        \r\n+        myPrint_Success(res)\r\n+    else:\r\n+        cache=res\r\n def next_Cpu(command,funs):\r\n     \r\n     if len(funs)==0:\r\n         res=Result.getResult(processor=\"next_cpu\")\r\n"
+                },
+                {
+                    "date": 1697444658469,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n     myPrint_Hint(f\"指令：{command},下一个处理器：{fun.__name__}\")\r\n \r\n cache=None\r\n def aop_postprocessing(res:Result):\r\n+    global cache\r\n     if cache==res:\r\n         \r\n         myPrint_Success(res)\r\n     else:\r\n"
+                },
+                {
+                    "date": 1697444695285,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \r\n cache=None\r\n def aop_postprocessing(res:Result):\r\n     global cache\r\n-    if cache==res:\r\n+    if cache!=res:\r\n         \r\n         myPrint_Success(res)\r\n     else:\r\n         cache=res\r\n"
+                },
+                {
+                    "date": 1697444770837,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,8 @@\n cache=None\r\n def aop_postprocessing(res:Result):\r\n     global cache\r\n     if cache!=res:\r\n-        \r\n         myPrint_Success(res)\r\n     else:\r\n         cache=res\r\n def next_Cpu(command,funs):\r\n"
+                },
+                {
+                    "date": 1697444802313,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n from myPrint import *\r\n def aop_preprocessing(command,fun):\r\n     myPrint_Hint(f\"指令：{command},下一个处理器：{fun.__name__}\")\r\n \r\n-cache=None\r\n+\r\n def aop_postprocessing(res:Result):\r\n     global cache\r\n     if cache!=res:\r\n         myPrint_Success(res)\r\n"
+                },
+                {
+                    "date": 1697444842680,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,26 @@\n+\r\n+from Shell_Tools.online_remote_shell.Result import Result\r\n+from myPrint import *\r\n+def aop_preprocessing(command,fun):\r\n+    myPrint_Hint(f\"指令：{command},下一个处理器：{fun.__name__}\")\r\n+\r\n+cache=None\r\n+\r\n+def aop_postprocessing(res:Result):\r\n+    global cache\r\n+    if cache!=res:\r\n+        myPrint_Success(res)\r\n+    else:\r\n+        cache=res\r\n+def next_Cpu(command,funs):\r\n+    \r\n+    if len(funs)==0:\r\n+        res=Result.getResult(processor=\"next_cpu\")\r\n+        aop_postprocessing(res)\r\n+        return res\r\n+    else:\r\n+        fun=funs.pop(0)\r\n+        aop_preprocessing(command,fun)\r\n+        res= fun(command,funs)\r\n+        aop_postprocessing(res)\r\n+        return res\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1697444890892,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,34 +9,10 @@\n def aop_postprocessing(res:Result):\r\n     global cache\r\n     if cache!=res:\r\n         myPrint_Success(res)\r\n-    else:\r\n         cache=res\r\n-def next_Cpu(command,funs):\r\n-    \r\n-    if len(funs)==0:\r\n-        res=Result.getResult(processor=\"next_cpu\")\r\n-        aop_postprocessing(res)\r\n-        return res\r\n     else:\r\n-        fun=funs.pop(0)\r\n-        aop_preprocessing(command,fun)\r\n-        res= fun(command,funs)\r\n-        aop_postprocessing(res)\r\n-        return res\n-\r\n-from Shell_Tools.online_remote_shell.Result import Result\r\n-from myPrint import *\r\n-def aop_preprocessing(command,fun):\r\n-    myPrint_Hint(f\"指令：{command},下一个处理器：{fun.__name__}\")\r\n-\r\n-\r\n-def aop_postprocessing(res:Result):\r\n-    global cache\r\n-    if cache!=res:\r\n-        myPrint_Success(res)\r\n-    else:\r\n         cache=res\r\n def next_Cpu(command,funs):\r\n     \r\n     if len(funs)==0:\r\n"
+                }
+            ],
+            "date": 1697416837319,
+            "name": "Commit-0",
+            "content": "\r\nfrom Shell_Tools.online_remote_shell import Result\r\n\r\n\r\ndef next_Cpu(command,funs):\r\n    if len(funs)==0:\r\n        return Result.getResult(processor=\"next_cpu\")\r\n    else:\r\n        funs.pop(0)\r\n        return funs[0](command,funs)"
+        }
+    ]
+}

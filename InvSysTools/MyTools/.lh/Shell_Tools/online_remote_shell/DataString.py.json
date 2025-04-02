@@ -1,0 +1,18 @@
+{
+    "sourceFile": "Shell_Tools/online_remote_shell/DataString.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1697282377777,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1697282377777,
+            "name": "Commit-0",
+            "content": "class Data:\r\n    def __init__(self,OS_TYPE) -> None:\r\n        self.OS_TYPE=OS_TYPE\r\n    def pwd_cd(self):\r\n        return {\"win\":\"cd\",\"linux\":\"pwd\"}[self.OS_TYPE]"
+        }
+    ]
+}

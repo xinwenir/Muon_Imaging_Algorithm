@@ -1,0 +1,50 @@
+{
+    "sourceFile": "Os_Tools/Os_Info.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1697416755443,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1697416871724,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n \r\n import time\r\n \r\n import os\r\n-\r\n+from Tools import ne\r\n #获取当前时间\r\n \r\n time_str = time.strftime( \"%Y-%m-%d\", time.localtime( ) )\r\n \r\n"
+                },
+                {
+                    "date": 1697416943308,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n \r\n import time\r\n \r\n import os\r\n-from Tools import ne\r\n+from Shell_Tools.online_remote_shell.Tools import next_Cpu\r\n #获取当前时间\r\n \r\n time_str = time.strftime( \"%Y-%m-%d\", time.localtime( ) )\r\n \r\n@@ -25,16 +25,16 @@\n         res=\"\"\r\n         for re in _all_fun.keys():\r\n             res+=str(re)\r\n             res+='\\n'\r\n-        return [\"\",res+funs[0](command,funs)[1]]\r\n+        return Res [\"\",res+funs[0](command,funs)[1]]\r\n     try:\r\n         if command not in _all_fun.keys():\r\n-            return funs[0](command,funs)\r\n+            return next_Cpu(command,funs)\r\n         else:\r\n             return [\"get_os_info\",_all_fun[command]()]\r\n     except Exception as e:\r\n-        return funs[0](command,funs)\r\n+        return next_Cpu(command,funs)\r\n \r\n #获取系统内存使用情况\r\n def _mem():\r\n \r\n"
+                },
+                {
+                    "date": 1697416978634,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n \r\n import time\r\n \r\n import os\r\n+from Result import Result\r\n from Shell_Tools.online_remote_shell.Tools import next_Cpu\r\n #获取当前时间\r\n \r\n time_str = time.strftime( \"%Y-%m-%d\", time.localtime( ) )\r\n"
+                },
+                {
+                    "date": 1697417200709,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n \r\n import os\r\n from Result import Result\r\n from Shell_Tools.online_remote_shell.Tools import next_Cpu\r\n+import Data\r\n #获取当前时间\r\n \r\n time_str = time.strftime( \"%Y-%m-%d\", time.localtime( ) )\r\n \r\n@@ -26,14 +27,14 @@\n         res=\"\"\r\n         for re in _all_fun.keys():\r\n             res+=str(re)\r\n             res+='\\n'\r\n-        return Res [\"\",res+funs[0](command,funs)[1]]\r\n+        return Result.getResult(processor=\"get_os_info\",output=res,returncode=Data.HELP)\r\n     try:\r\n         if command not in _all_fun.keys():\r\n             return next_Cpu(command,funs)\r\n         else:\r\n-            return [\"get_os_info\",_all_fun[command]()]\r\n+            return Result.getResult(processor=\"get_os_info\",output=_all_fun[command](),returncode=1)\r\n     except Exception as e:\r\n         return next_Cpu(command,funs)\r\n \r\n #获取系统内存使用情况\r\n"
+                },
+                {
+                    "date": 1697417288514,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n     try:\r\n         if command not in _all_fun.keys():\r\n             return next_Cpu(command,funs)\r\n         else:\r\n-            return Result.getResult(processor=\"get_os_info\",output=_all_fun[command](),returncode=1)\r\n+            return Result.getResult(processor=\"get_os_info\",output=_all_fun[command](),returncode=Data.SUCESS)\r\n     except Exception as e:\r\n         return next_Cpu(command,funs)\r\n \r\n #获取系统内存使用情况\r\n"
+                },
+                {
+                    "date": 1697417369062,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n \r\n import time\r\n \r\n import os\r\n-from Result import Result\r\n+from Shell_Tools.online_remote_shell.Result import Result\r\n from Shell_Tools.online_remote_shell.Tools import next_Cpu\r\n import Data\r\n #获取当前时间\r\n \r\n"
+                },
+                {
+                    "date": 1697417462492,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n     _all_fun = {\r\n                    \"os_mem\":_mem, \"os_cpu\":_cpu, \"os_user_info\":_os_user, \"os_disk\":_disk\r\n     }\r\n     \r\n-    if command==\"-h\":\r\n+    if command==\"help\":\r\n         res=\"\"\r\n         for re in _all_fun.keys():\r\n             res+=str(re)\r\n             res+='\\n'\r\n"
+                },
+                {
+                    "date": 1697445513356,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -109,5 +109,6 @@\n \r\n         print_str += \"---------------------------------------------------------------\\n\"\r\n \r\n         print ( print_str )\r\n+    return print_str\r\n \r\n"
+                }
+            ],
+            "date": 1697416755443,
+            "name": "Commit-0",
+            "content": "# author:高金磊\r\n# datetime:2022/7/31 20:29\r\n# coding=utf-8\r\n\r\n# 获取系统基本信息\r\n\r\nimport sys\r\n\r\nimport psutil\r\n\r\nimport time\r\n\r\nimport os\r\n\r\n#获取当前时间\r\n\r\ntime_str = time.strftime( \"%Y-%m-%d\", time.localtime( ) )\r\n\r\ndef get_os_info(command:str,funs):\r\n    _all_fun = {\r\n                   \"os_mem\":_mem, \"os_cpu\":_cpu, \"os_user_info\":_os_user, \"os_disk\":_disk\r\n    }\r\n    \r\n    if command==\"-h\":\r\n        res=\"\"\r\n        for re in _all_fun.keys():\r\n            res+=str(re)\r\n            res+='\\n'\r\n        return [\"\",res+funs[0](command,funs)[1]]\r\n    try:\r\n        if command not in _all_fun.keys():\r\n            return funs[0](command,funs)\r\n        else:\r\n            return [\"get_os_info\",_all_fun[command]()]\r\n    except Exception as e:\r\n        return funs[0](command,funs)\r\n\r\n#获取系统内存使用情况\r\ndef _mem():\r\n\r\n    memory_convent = 1024 * 1024\r\n\r\n    mem = psutil.virtual_memory()\r\n\r\n    print_str = \" 内存状态如下:\\n\"\r\n\r\n    print_str = print_str + \" 系统的内存容量为: \"+str( mem.total/( memory_convent ) ) + \" MB\\n\"\r\n\r\n    print_str = print_str + \" 系统的内存以使用容量为: \"+str( mem.used/( memory_convent ) ) + \" MB\\n\"\r\n\r\n    print_str = print_str + \" 系统可用的内存容量为: \"+str( mem.total/( memory_convent ) - mem.used/( 1024*1024 )) + \"MB\\n\"\r\n\r\n    # print_str = print_str + \" 内存的buffer容量为: \"+str( mem.buffers/( memory_convent ) ) + \" MB\\n\"\r\n\r\n    # print_str = print_str + \" 内存的cache容量为:\" +str( mem.cached/( memory_convent ) ) + \" MB\\n\"\r\n    return print_str\r\n#获取cpu的相关信息\r\n\r\ndef _cpu():\r\n\r\n\r\n    print_str = \" CPU状态如下:\\n\"\r\n\r\n    cpu_status = psutil.cpu_times()\r\n\r\n    print_str = print_str + \" user = \" + str( cpu_status.user ) + \"\\n\"\r\n\r\n    # print_str = print_str + \" nice = \" + str( cpu_status.nice ) + \"\\n\"\r\n\r\n    print_str = print_str + \" system = \" + str( cpu_status.system ) + \"\\n\"\r\n\r\n    print_str = print_str + \" idle = \" + str ( cpu_status.idle ) + \"\\n\"\r\n\r\n    # print_str = print_str + \" iowait = \" + str ( cpu_status.iowait ) + \"\\n\"\r\n\r\n    # print_str = print_str + \" irq = \" + str( cpu_status.irq ) + \"\\n\"\r\n\r\n    # print_str = print_str + \" softirq = \" + str ( cpu_status.softirq ) + \"\\n\"\r\n\r\n    # print_str = print_str + \" steal = \" + str ( cpu_status.steal ) + \"\\n\"\r\n\r\n    # print_str = print_str + \" guest = \" + str ( cpu_status.guest ) + \"\\n\"\r\n    return print_str\r\n#查看硬盘基本信息\r\n\r\ndef _disk():\r\n\r\n    print_str = \" 硬盘信息如下:\\n\"\r\n\r\n    disk_status = psutil.disk_partitions()\r\n\r\n    for item in disk_status :\r\n\r\n        print_str = print_str + \" \"+ str( item ) + \"\\n\"\r\n    return print_str\r\n#查看当前登录的用户信息\r\n\r\ndef _os_user():\r\n\r\n    print_str = \" 登录用户信息如下:\\n \"\r\n\r\n    user_status = psutil.users()\r\n\r\n    for item in user_status :\r\n\r\n        print_str = print_str + \" \"+ str( item ) + \"\\n\"\r\n\r\n        print_str += \"---------------------------------------------------------------\\n\"\r\n\r\n        print ( print_str )\r\n\r\n"
+        }
+    ]
+}

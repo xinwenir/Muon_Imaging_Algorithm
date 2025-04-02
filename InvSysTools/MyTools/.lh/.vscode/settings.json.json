@@ -1,0 +1,18 @@
+{
+    "sourceFile": ".vscode/settings.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1697416972130,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1697416972130,
+            "name": "Commit-0",
+            "content": "{\r\n    \"python.analysis.extraPaths\": [\r\n        \"./Shell_Tools/online_remote_shell\"\r\n    ]\r\n}"
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "sourceFile": "Os_Tools/process_tool.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1697417410025,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1697417456300,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,10 @@\n # datetime:2022/8/1 8:56\r\n \r\n import psutil\r\n import os\r\n-\r\n+from Shell_Tools.online_remote_shell.Result import Result\r\n+from Shell_Tools.online_remote_shell.Tools import next_Cpu\r\n def Chain_Process_tool(command:str,funs):\r\n     \"\"\"\r\n     查询当前进程的情况,暂时不支持查询其他进程\r\n     :param command:  命令\"show process\"\r\n@@ -12,14 +13,14 @@\n     :return:\r\n     \"\"\"\r\n \r\n \r\n-    if command==\"-h\":\r\n-        return [\"\",\"show process\\n\"+str(funs[0](command,funs)[1])]\r\n+    if command==\"help\":\r\n+        return Result.getResult(processor=\"Chain_Process_tool\",) [\"\",\"show process\\n\"+str(funs[0](command,funs)[1])]\r\n     if \"show process\"==command:\r\n         return [\"Chain_Process_tool\",_get_Process_cpu_mem()]\r\n     else:\r\n-        return \r\n+        return next_Cpu(command,funs)\r\n \r\n def _get_Process_cpu_mem(pid=None):\r\n     res=\"\"\r\n     try:\r\n"
+                },
+                {
+                    "date": 1697417538834,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n     \"\"\"\r\n \r\n \r\n     if command==\"help\":\r\n-        return Result.getResult(processor=\"Chain_Process_tool\",) [\"\",\"show process\\n\"+str(funs[0](command,funs)[1])]\r\n+        return Result.getResult(processor=\"Chain_Process_tool\",output=\"show process:查询当前进程的情况,暂时不支持查询其他进程\",returncode=Data) \r\n     if \"show process\"==command:\r\n         return [\"Chain_Process_tool\",_get_Process_cpu_mem()]\r\n     else:\r\n         return next_Cpu(command,funs)\r\n"
+                }
+            ],
+            "date": 1697417410025,
+            "name": "Commit-0",
+            "content": "# author:高金磊\r\n# datetime:2022/8/1 8:56\r\n\r\nimport psutil\r\nimport os\r\n\r\ndef Chain_Process_tool(command:str,funs):\r\n    \"\"\"\r\n    查询当前进程的情况,暂时不支持查询其他进程\r\n    :param command:  命令\"show process\"\r\n    :param fun: 未命中后执行的操作\r\n    :return:\r\n    \"\"\"\r\n\r\n\r\n    if command==\"-h\":\r\n        return [\"\",\"show process\\n\"+str(funs[0](command,funs)[1])]\r\n    if \"show process\"==command:\r\n        return [\"Chain_Process_tool\",_get_Process_cpu_mem()]\r\n    else:\r\n        return \r\n\r\ndef _get_Process_cpu_mem(pid=None):\r\n    res=\"\"\r\n    try:\r\n        if pid is None:\r\n            pid = os.getpid()\r\n        p=psutil.Process(pid)\r\n        res+=\"PID:%s 进程名称%s: 进程创建时间:%s cpu占用百分比:%s 内存占用百分比:%s\"%(p.pid,p.name(),p.create_time(),p.cpu_percent(),p.memory_percent())\r\n    except Exception as e:\r\n        res+=\"获取失败将获取本进程的信息\\n\"+str(e)+\"\\n\"+_get_Process_cpu_mem()\r\n\r\n    return res"
+        }
+    ]
+}
